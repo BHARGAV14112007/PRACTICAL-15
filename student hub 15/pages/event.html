@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Campus Events</title>
+    <meta name="description" content="Explore and register for upcoming campus events, hackathons, workshops, and competitions.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/auth.js"></script>
+    <script>
+      // Blocking gate (runs BEFORE body content is parsed or painted).
+      // Only authenticated users (student or admin) may proceed.
+      if (window.AuthGate) window.AuthGate.requireLogin();
+    </script>
+    <script defer src="../js/header.js"></script>
+    <script defer src="../js/events-page.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="event.html" class="nav-link active">Events</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Sidebar & Events Layout -->
+    <div class="sidebar-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-user">
+                <svg class="sidebar-avatar" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="50" fill="#2563D9"/>
+                    <circle cx="50" cy="40" r="20" fill="#EAF3FF"/>
+                    <path d="M20 85C20 68 33 55 50 55C67 55 80 68 80 85" fill="#EAF3FF"/>
+                </svg>
+                <div>
+                    <div class="sidebar-user-name user-display-name">Alex Johnson</div>
+                    <div class="sidebar-user-role user-display-role">Student Portal</div>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html" class="sidebar-link">Dashboard</a></li>
+                <li><a href="profile.html" class="sidebar-link">Profile</a></li>
+                <li><a href="event.html" class="sidebar-link active">Events</a></li>
+                <li><a href="faq.html" class="sidebar-link">FAQs</a></li>
+                <li><a href="dashboard.html" class="sidebar-link">Data Explorer</a></li>
+                <li><a href="home.html" class="sidebar-link">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Events Content -->
+        <main class="sidebar-content" id="events-section-anchor">
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <h1 class="page-title">Campus Events</h1>
+                    <p class="page-subtitle">Browse, filter, and register for workshops, competitions, and festivals</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                    <span style="background: var(--primary-light); padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; color: var(--primary-color); font-weight: 600;">
+                        🔒 Event Add/Modify: Admin Handled Only
+                    </span>
+                    <a href="admin.html" id="admin-events-link" class="btn btn-sm btn-outline" style="display: none;">
+                        🛡️ Admin Control Panel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search, Filter and Sort Controls -->
+            <section class="card mb-3" aria-label="Events controls" style="padding: 1.25rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; align-items: flex-end;">
+                    <div>
+                        <label for="event-search-input" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-main);">
+                            Search Events
+                        </label>
+                        <input id="event-search-input" type="search" placeholder="Search by title, venue, organizer..." class="form-control" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="event-category-select" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-main);">
+                            Filter by Category
+                        </label>
+                        <select id="event-category-select" class="form-control">
+                            <option value="all">All Categories</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="event-sort-select" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-main);">
+                            Sort Events
+                        </label>
+                        <select id="event-sort-select" class="form-control">
+                            <option value="date-asc">Date: Earliest First</option>
+                            <option value="date-desc">Date: Latest First</option>
+                            <option value="title-asc">Title: A to Z</option>
+                            <option value="title-desc">Title: Z to A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Event Category Quick Filter Pills -->
+                <div style="display: flex; gap: 0.5rem; margin-top: 1.25rem; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); align-self: center; margin-right: 0.25rem;">Quick Filter:</span>
+                    <button type="button" class="btn btn-sm btn-primary category-tab" data-category="all">All</button>
+                    <button type="button" class="btn btn-sm btn-outline category-tab" data-category="Technical">Technical</button>
+                    <button type="button" class="btn btn-sm btn-outline category-tab" data-category="Workshop">Workshop</button>
+                    <button type="button" class="btn btn-sm btn-outline category-tab" data-category="Cultural">Cultural</button>
+                    <button type="button" class="btn btn-sm btn-outline category-tab" data-category="Sports">Sports</button>
+                    <button type="button" class="btn btn-sm btn-outline category-tab" data-category="Seminar">Seminar</button>
+                </div>
+            </section>
+
+            <!-- Results Summary -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding: 0 0.25rem;">
+                <p id="event-result-count" style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin: 0;">
+                    Loading events...
+                </p>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                    Showing <strong>4</strong> items per page
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="events-loading" style="display: none; text-align: center; padding: 2rem; color: var(--primary-color);">
+                <p>⏳ Loading campus events from JSON database...</p>
+            </div>
+
+            <!-- Dynamic Events Grid (4 cards displayed per page) -->
+            <section id="events-container" class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;" aria-live="polite">
+                <!-- Dynamically populated from data/events.json -->
+            </section>
+
+            <!-- Pagination Navigation -->
+            <nav id="events-pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; margin-bottom: 2rem;" aria-label="Events Pagination">
+                <!-- Dynamic page buttons -->
+            </nav>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('student_hub_is_admin') === 'true') {
+                const adminLink = document.getElementById('admin-events-link');
+                if (adminLink) adminLink.style.display = 'inline-block';
+            }
+        });
+    </script>
+</body>
+</html>

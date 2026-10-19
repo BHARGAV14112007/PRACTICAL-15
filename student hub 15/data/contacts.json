@@ -1,0 +1,62 @@
+[
+    {
+        "id": "MSG-1006",
+        "name": "khucho",
+        "email": "khus2525@gmail.com",
+        "subject": "amathu",
+        "message": "su hale kaleja",
+        "status": "New",
+        "submittedAt": "2026-10-05 09:42:02",
+        "ipAddress": "::1"
+    },
+    {
+        "id": "MSG-1005",
+        "name": "Sneha Desai",
+        "email": "sneha.desai@college.edu",
+        "subject": "Campus Workshop Query",
+        "message": "Could you please provide the session schedule for the upcoming Cloud Computing workshop?",
+        "status": "New",
+        "submittedAt": "2026-10-04 18:21:08",
+        "ipAddress": "127.0.0.1"
+    },
+    {
+        "id": "MSG-1004",
+        "name": "Dr. R. Sharma",
+        "email": "r.sharma@college.edu",
+        "subject": "Guest Lecture on AI Systems",
+        "message": "I would like to schedule a seminar for third-year CS students next Friday.",
+        "status": "New",
+        "submittedAt": "2026-10-04 18:19:28",
+        "ipAddress": "127.0.0.1"
+    },
+    {
+        "id": "MSG-1003",
+        "name": "Dr. R. Sharma",
+        "email": "r.sharma@college.edu",
+        "subject": "Guest Lecture on AI Systems",
+        "message": "I would like to schedule a seminar for third-year CS students next Friday.",
+        "status": "New",
+        "submittedAt": "2026-10-04 18:19:09",
+        "ipAddress": "127.0.0.1"
+    },
+    {
+        "id": "MSG-1001",
+        "name": "Devansh Roy",
+        "email": "devansh.roy@college.edu",
+        "subject": "Hackathon 2026 Registration Query",
+        "message": "Hello, I wanted to know if inter-college teams are permitted for the upcoming Campus Web Hackathon 2026?",
+        "status": "Resolved",
+        "submittedAt": "2026-09-28 11:30:00",
+        "ipAddress": "127.0.0.1"
+    },
+    {
+        "id": "MSG-1002",
+        "name": "Meera Nair",
+        "email": "meera.nair@college.edu",
+        "subject": "Library Access Card Renewal",
+        "message": "My digital library ID barcode is expiring this semester. How can I renew my student library access?",
+        "status": "Pending",
+        "submittedAt": "2026-10-01 14:15:20",
+        "ipAddress": "127.0.0.1"
+    }
+]

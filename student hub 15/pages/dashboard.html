@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Student Dashboard</title>
+    <meta name="description" content="Student Portal - Access upcoming campus events, study resources, and announcements.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/auth.js"></script>
+    <script>
+      // Blocking gate (runs BEFORE body content is parsed or painted).
+      // Only authenticated users (student or admin) may proceed.
+      if (window.AuthGate) window.AuthGate.requireLogin();
+    </script>
+    <script defer src="../js/header.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Sidebar & Dashboard Layout -->
+    <div class="sidebar-layout">
+        <!-- Dark Blue Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-user">
+                <svg class="sidebar-avatar" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="50" fill="#2563D9"/>
+                    <circle cx="50" cy="40" r="20" fill="#EAF3FF"/>
+                    <path d="M20 85C20 68 33 55 50 55C67 55 80 68 80 85" fill="#EAF3FF"/>
+                </svg>
+                <div>
+                    <div class="sidebar-user-name user-display-name">Alex Johnson</div>
+                    <div class="sidebar-user-role user-display-role">Computer Science '26</div>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html" class="sidebar-link active">Dashboard</a></li>
+                <li><a href="profile.html" class="sidebar-link">Profile</a></li>
+                <li><a href="event.html" class="sidebar-link">Events</a></li>
+                <li><a href="resources.html" class="sidebar-link">Resources</a></li>
+                <li><a href="messages.html" class="sidebar-link">Messages</a></li>
+                <li><a href="settings.html" class="sidebar-link">Settings</a></li>
+                <li><a href="home.html" class="sidebar-link">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="sidebar-content">
+            <div class="page-header">
+                <h1 class="page-title">Student Dashboard</h1>
+                <p class="page-subtitle">Welcome back, Alex! Here is your campus overview.</p>
+            </div>
+
+            <!-- Welcome Card -->
+            <div class="card mb-3" style="background: linear-gradient(135deg, #163B65 0%, #2563D9 100%); color: white;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: white;">Mid-Term Exam Schedule Released</h2>
+                <p style="color: #DBEAFE; margin-bottom: 1rem;">The official mid-term examination timetable for Spring 2026 is now available in your study portal.</p>
+                <a href="#resources" class="btn btn-outline" style="background: white; color: #163B65 !important; border: none;">Download Schedule PDF</a>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Upcoming Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Registered Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Notifications</div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events List Section -->
+            <div class="card">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem;">My Upcoming Campus Events</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date & Time</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tech Fest 2026</strong></td>
+                                <td>Mar 15, 2026 • 10:00 AM</td>
+                                <td>Main Auditorium</td>
+                                <td><span style="color: #16a34a; font-weight: 600;">Registered</span></td>
+                                <td><a href="event.html" class="btn btn-sm btn-outline">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI & Machine Learning Workshop</strong></td>
+                                <td>Mar 20, 2026 • 02:00 PM</td>
+                                <td>CS Lab 302</td>
+                                <td><span style="color: #16a34a; font-weight: 600;">Registered</span></td>
+                                <td><a href="event.html" class="btn btn-sm btn-outline">Details</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Annual Hackathon 2026</strong></td>
+                                <td>Apr 02, 2026 • 09:00 AM</td>
+                                <td>Innovation Hub</td>
+                                <td><span style="color: #2563D9; font-weight: 600;">Open</span></td>
+                                <td><a href="event.html" class="btn btn-sm btn-primary">Register</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

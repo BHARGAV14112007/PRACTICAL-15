@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Frequently Asked Questions</title>
+    <meta name="description" content="Find answers to common questions about Student Hub events, study resources, and account management.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/header.js"></script>
+    <script defer src="../js/faq-page.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="faq.html" class="nav-link active">FAQ</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container" style="max-width: 950px; padding: 2rem 1.5rem;">
+        <div class="page-header text-center" style="margin-top: 0.5rem; margin-bottom: 2rem;">
+            <h1 class="page-title" style="font-size: 2.25rem;">Frequently Asked Questions</h1>
+            <p class="page-subtitle">Instantly search campus questions, exam policies, facilities, and rules loaded dynamically via JSON</p>
+        </div>
+
+        <!-- Search Bar and Category Tabs Card -->
+        <div class="card mb-3" style="padding: 1.25rem;">
+            <div style="margin-bottom: 1rem;">
+                <label for="faq-search-input" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-main);">
+                    Search Knowledge Base
+                </label>
+                <input id="faq-search-input" type="search" placeholder="Type keywords (e.g. library, exam, event registration, wifi, timetable)..." class="form-control" autocomplete="off">
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; border-top: 1px solid var(--border-color); padding-top: 0.85rem;">
+                <span style="font-size: 0.85rem; color: var(--text-muted); margin-right: 0.25rem; font-weight: 600;">Category:</span>
+                <button type="button" class="btn btn-sm btn-primary faq-category-tab" data-category="all">All Topics</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Events">Events</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Academics">Academics</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Library">Library</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Facilities">Facilities</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Sports">Sports</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Examinations">Examinations</button>
+                <button type="button" class="btn btn-sm btn-outline faq-category-tab" data-category="Administration">Administration</button>
+            </div>
+        </div>
+
+        <!-- Results Info & Loading Indicator -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0 0.25rem;">
+            <p id="faq-result-count" style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin: 0;">
+                Loading FAQs...
+            </p>
+        </div>
+
+        <div id="faq-loading" style="display: none; text-align: center; padding: 1.5rem; color: var(--primary-color);">
+            <p>⏳ Fetching FAQs from JSON dataset...</p>
+        </div>
+
+        <!-- Pure Dynamic HTML5 Accordion FAQs -->
+        <div id="faqs-container" style="margin-bottom: 3rem;">
+            <!-- Dynamically populated from data/faqs.json -->
+        </div>
+
+        <!-- Support Section Card -->
+        <div class="card text-center mb-3" style="background: var(--primary-light); border: 1px solid rgba(37, 99, 217, 0.25); padding: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--secondary-color); margin-bottom: 0.5rem;">Still Have Questions?</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.25rem;">Can't find the answer you are looking for? Our campus student support desk is available on weekdays.</p>
+            <a href="contact.html" class="btn btn-primary">Contact Campus Support</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Home</title>
+    <meta name="description" content="Student Hub - Your one-stop platform for campus events, study resources, notices, and community connection.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/header.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-wrapper">
+            <div>
+                <h1 class="hero-title">Welcome to <br><span>Student Hub</span></h1>
+                <p class="hero-description">Your one-stop platform for campus events, study resources, notices, and connecting with your campus community.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="login.html" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">Explore Now</a>
+                    <a href="login.html" class="btn btn-outline" style="padding: 0.75rem 1.75rem;">Student Portal</a>
+                </div>
+            </div>
+            <div>
+                <svg class="hero-illustration" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="500" height="400" rx="16" fill="#EAF3FF"/>
+                    <circle cx="250" cy="200" r="140" fill="#DBEAFE"/>
+                    <path d="M180 260C180 226.863 206.863 200 240 200C273.137 200 300 226.863 300 260V280H180V260Z" fill="#2563D9"/>
+                    <circle cx="240" cy="150" r="35" fill="#163B65"/>
+                    <path d="M300 270C300 242.386 322.386 220 350 220C377.614 220 400 242.386 400 270V280H300V270Z" fill="#3B82F6"/>
+                    <circle cx="350" cy="180" r="28" fill="#2563D9"/>
+                    <path d="M100 270C100 242.386 122.386 220 150 220C177.614 220 200 242.386 200 270V280H100V270Z" fill="#60A5FA"/>
+                    <circle cx="150" cy="180" r="28" fill="#3B82F6"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- What We Offer Section -->
+        <section style="margin-top: 3rem; margin-bottom: 3rem;">
+            <h2 style="font-size: 1.75rem; font-weight: 700; text-align: center; margin-bottom: 1.75rem; color: var(--navy);">What We Offer</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3 class="feature-title">Events</h3>
+                    <p class="feature-desc">Discover and join exciting campus events, workshops, hackathons, and cultural fests.</p>
+                    <br>
+                    <a href="event.html" class="btn btn-sm btn-outline btn-block">Explore Events</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="feature-title">Resources</h3>
+                    <p class="feature-desc">Access study materials, exam notes, lab manuals, and important notices anytime.</p>
+                    <br>
+                    <a href="dashboard.html" class="btn btn-sm btn-outline btn-block">Access Resources</a>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="feature-title">Connect</h3>
+                    <p class="feature-desc">Connect with fellow students, department notice boards, and campus clubs effortlessly.</p>
+                    <br>
+                    <a href="about.html" class="btn btn-sm btn-outline btn-block">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Admin Dashboard & Event Control</title>
+    <meta name="description" content="Admin Control Panel - Manage campus events, student accounts, and system analytics.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/auth.js"></script>
+    <script>
+      // Blocking gate: Only authenticated admins may proceed.
+      if (window.AuthGate) window.AuthGate.requireAdmin();
+    </script>
+    <script defer src="../js/header.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="event.html" class="nav-link">Events</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="admin.html" class="nav-link active">Admin</a></li>
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Sidebar & Admin Layout -->
+    <div class="sidebar-layout">
+        <!-- Dark Navy Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-user">
+                <svg class="sidebar-avatar" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="50" fill="#102A43"/>
+                    <circle cx="50" cy="40" r="20" fill="#60A5FA"/>
+                    <path d="M20 85C20 68 33 55 50 55C67 55 80 68 80 85" fill="#60A5FA"/>
+                </svg>
+                <div>
+                    <div class="sidebar-user-name user-display-name">System Administrator</div>
+                    <div class="sidebar-user-role user-display-role">🛡️ Admin Access</div>
+                </div>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="#events-mgmt" class="sidebar-link active" onclick="switchAdminTab('events')">🎟️ Manage Events</a></li>
+                <li><a href="#students-mgmt" class="sidebar-link" onclick="switchAdminTab('students')">🎓 Student Records</a></li>
+                <li><a href="event.html" class="sidebar-link">Campus Events View</a></li>
+                <li><a href="dashboard.html" class="sidebar-link">Student Dashboard</a></li>
+                <li><a href="home.html" class="sidebar-link" onclick="handleLogout()">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Admin Content -->
+        <main class="sidebar-content">
+            <!-- Toast notification for actions -->
+            <div id="admin-toast" style="display: none; padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1.25rem; font-weight: 600;"></div>
+
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <h1 class="page-title">Administrator Control Center</h1>
+                    <p class="page-subtitle">Exclusive portal to create, modify campus events and view all registered student records</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-outline" onclick="exportDataJson()">💾 Export System Data</button>
+                    <button type="button" class="btn btn-primary" onclick="openEventModal('add')">+ Add New Event</button>
+                </div>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total-students">--</div>
+                    <div class="stat-label">Total Registered Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total-events">--</div>
+                    <div class="stat-label">Total Campus Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-categories">--</div>
+                    <div class="stat-label">Event Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-admin-status">Active</div>
+                    <div class="stat-label">Admin Privilege Level</div>
+                </div>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">
+                <button type="button" id="tab-btn-events" class="btn btn-primary" onclick="switchAdminTab('events')">
+                    🎟️ Events Management (Add / Modify / Delete)
+                </button>
+                <button type="button" id="tab-btn-students" class="btn btn-outline" onclick="switchAdminTab('students')">
+                    🎓 Student Directory & All Records (Admin Only)
+                </button>
+            </div>
+
+            <!-- SECTION 1: EVENTS MANAGEMENT (ADD / MODIFY / DELETE) -->
+            <section id="section-events-mgmt">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem;">
+                                Campus Events Manager
+                            </h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                                Only administrators can create, edit, modify, and delete campus events.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <input type="search" id="admin-event-search" placeholder="Search events..." class="form-control" style="width: 220px;" oninput="renderAdminEventsTable()">
+                            <select id="admin-event-category-filter" class="form-control" style="width: 160px;" onchange="renderAdminEventsTable()">
+                                <option value="all">All Categories</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Seminar">Seminar</option>
+                            </select>
+                            <button type="button" class="btn btn-primary" onclick="openEventModal('add')">+ Add Event</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Event Title</th>
+                                    <th>Category</th>
+                                    <th>Date & Time</th>
+                                    <th>Venue</th>
+                                    <th>Organizer</th>
+                                    <th>Capacity</th>
+                                    <th>Actions (Modify / Delete)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-events-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: STUDENT RECORDS DIRECTORY (ADMIN ONLY ACCESS) -->
+            <section id="section-students-mgmt" style="display: none;">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem;">
+                                Complete Student Database (Admin Exclusive)
+                            </h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                                Confidential student records protected from student-to-student access.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <input type="search" id="admin-student-search" placeholder="Search name, email, ID..." class="form-control" style="width: 240px;" oninput="renderAdminStudentsTable()">
+                            <select id="admin-student-dept-filter" class="form-control" style="width: 180px;" onchange="renderAdminStudentsTable()">
+                                <option value="all">All Departments</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Course & Year</th>
+                                    <th>Department</th>
+                                    <th>Mobile</th>
+                                    <th>Location</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-students-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ADD / EDIT EVENT MODAL (ADMIN ONLY) -->
+    <div id="event-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(16, 42, 69, 0.65); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+        <div class="card" style="width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; padding: 2rem; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                <h3 id="event-modal-title" style="font-size: 1.35rem; font-weight: 700; color: var(--navy); margin: 0;">+ Add New Event</h3>
+                <button type="button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="closeEventModal()">&times;</button>
+            </div>
+
+            <form id="event-modal-form" onsubmit="saveEventData(event)">
+                <input type="hidden" id="event-edit-id">
+
+                <div class="form-group">
+                    <label class="form-label" for="event-title-input">Event Title <span style="color: #dc2626;">*</span></label>
+                    <input type="text" id="event-title-input" class="form-control" placeholder="e.g. AI & Machine Learning Workshop" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="event-category-input">Category <span style="color: #dc2626;">*</span></label>
+                        <select id="event-category-input" class="form-control" required>
+                            <option value="Technical">Technical</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Seminar">Seminar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="event-date-input">Event Date <span style="color: #dc2626;">*</span></label>
+                        <input type="date" id="event-date-input" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="event-time-input">Time Range</label>
+                        <input type="text" id="event-time-input" class="form-control" placeholder="e.g. 10:00 AM - 02:00 PM">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="event-capacity-input">Capacity / Seats</label>
+                        <input type="number" id="event-capacity-input" class="form-control" placeholder="e.g. 150" min="1">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="event-venue-input">Venue / Location <span style="color: #dc2626;">*</span></label>
+                        <input type="text" id="event-venue-input" class="form-control" placeholder="e.g. Main Auditorium" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="event-organizer-input">Organizer / Department <span style="color: #dc2626;">*</span></label>
+                        <input type="text" id="event-organizer-input" class="form-control" placeholder="e.g. CSE Department" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="event-description-input">Event Description <span style="color: #dc2626;">*</span></label>
+                    <textarea id="event-description-input" class="form-control" rows="3" placeholder="Provide detailed agenda, prerequisites, and highlights..." required></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-outline" onclick="closeEventModal()">Cancel</button>
+                    <button type="submit" id="event-submit-btn" class="btn btn-primary">Save Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- STUDENT DETAILS VIEW MODAL (ADMIN ONLY) -->
+    <div id="student-view-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(16, 42, 69, 0.65); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+        <div class="card" style="width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; padding: 2rem; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--navy); margin: 0;">Student Record Details</h3>
+                <button type="button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="closeStudentModal()">&times;</button>
+            </div>
+            <div id="student-view-content">
+                <!-- Loaded dynamically -->
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" class="btn btn-primary" onclick="closeStudentModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Logic Script -->
+    <script>
+        let adminEvents = [];
+        let adminStudents = [];
+
+        function showToast(msg, isSuccess = true) {
+            const toast = document.getElementById('admin-toast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            toast.style.background = isSuccess ? '#dcfce7' : '#fee2e2';
+            toast.style.color = isSuccess ? '#15803d' : '#b91c1c';
+            toast.style.border = isSuccess ? '1px solid #86efac' : '1px solid #fca5a5';
+            setTimeout(() => { toast.style.display = 'none'; }, 3500);
+        }
+
+        function switchAdminTab(tab) {
+            const eventsSec = document.getElementById('section-events-mgmt');
+            const studentsSec = document.getElementById('section-students-mgmt');
+            const btnEvents = document.getElementById('tab-btn-events');
+            const btnStudents = document.getElementById('tab-btn-students');
+
+            if (tab === 'students') {
+                eventsSec.style.display = 'none';
+                studentsSec.style.display = 'block';
+                btnStudents.classList.add('btn-primary');
+                btnStudents.classList.remove('btn-outline');
+                btnEvents.classList.remove('btn-primary');
+                btnEvents.classList.add('btn-outline');
+            } else {
+                studentsSec.style.display = 'none';
+                eventsSec.style.display = 'block';
+                btnEvents.classList.add('btn-primary');
+                btnEvents.classList.remove('btn-outline');
+                btnStudents.classList.remove('btn-primary');
+                btnStudents.classList.add('btn-outline');
+            }
+        }
+
+        async function loadAdminData() {
+            // 1. Load Events
+            try {
+                const storedEvents = localStorage.getItem('student_hub_events');
+                if (storedEvents) {
+                    adminEvents = JSON.parse(storedEvents);
+                } else {
+                    const res = await fetch('../data/events.json');
+                    if (res.ok) {
+                        adminEvents = await res.json();
+                        localStorage.setItem('student_hub_events', JSON.stringify(adminEvents));
+                    }
+                }
+            } catch (e) {
+                console.error('Error loading events:', e);
+            }
+
+            // 2. Load Students
+            try {
+                let fileStudents = [];
+                const res = await fetch('../data/students.json');
+                if (res.ok) fileStudents = await res.json();
+
+                const localStudents = JSON.parse(localStorage.getItem('student_hub_students') || '[]');
+                const map = new Map();
+                fileStudents.forEach(s => { if (s.email) map.set(s.email.toLowerCase(), s); });
+                localStudents.forEach(s => { if (s.email) map.set(s.email.toLowerCase(), s); });
+
+                adminStudents = Array.from(map.values());
+            } catch (e) {
+                console.error('Error loading students:', e);
+            }
+
+            updateDashboardStats();
+            renderAdminEventsTable();
+            populateStudentDeptOptions();
+            renderAdminStudentsTable();
+        }
+
+        function updateDashboardStats() {
+            document.getElementById('stat-total-students').textContent = adminStudents.length;
+            document.getElementById('stat-total-events').textContent = adminEvents.length;
+            const categories = new Set(adminEvents.map(e => e.category));
+            document.getElementById('stat-categories').textContent = categories.size;
+        }
+
+        // ==========================================
+        // EVENTS MANAGEMENT (ADD / EDIT / DELETE)
+        // ==========================================
+        function renderAdminEventsTable() {
+            const tbody = document.getElementById('admin-events-tbody');
+            if (!tbody) return;
+
+            const q = (document.getElementById('admin-event-search').value || '').toLowerCase().trim();
+            const cat = document.getElementById('admin-event-category-filter').value;
+
+            const filtered = adminEvents.filter(e => {
+                const matchCat = (cat === 'all' || e.category === cat);
+                const matchQ = !q || e.title.toLowerCase().includes(q) || e.venue.toLowerCase().includes(q) || e.organizer.toLowerCase().includes(q);
+                return matchCat && matchQ;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No events found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(ev => `
+                <tr>
+                    <td><strong>#${ev.id}</strong></td>
+                    <td><strong>${ev.title}</strong></td>
+                    <td><span style="background: var(--primary-light); color: var(--primary-color); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">${ev.category}</span></td>
+                    <td>${ev.date} ${ev.time ? `<br><small style="color: var(--text-muted);">${ev.time}</small>` : ''}</td>
+                    <td>${ev.venue}</td>
+                    <td>${ev.organizer}</td>
+                    <td>${ev.seatsAvailable || 100} seats</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline" style="margin-right: 0.35rem;" onclick="openEventModal('edit', ${ev.id})">✏️ Edit</button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteEvent(${ev.id})">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openEventModal(mode, eventId = null) {
+            const modal = document.getElementById('event-modal');
+            const titleEl = document.getElementById('event-modal-title');
+            const form = document.getElementById('event-modal-form');
+            const editIdInput = document.getElementById('event-edit-id');
+
+            form.reset();
+
+            if (mode === 'edit' && eventId) {
+                const ev = adminEvents.find(e => e.id == eventId);
+                if (!ev) return;
+                titleEl.textContent = '✏️ Modify Campus Event #' + ev.id;
+                editIdInput.value = ev.id;
+                document.getElementById('event-title-input').value = ev.title;
+                document.getElementById('event-category-input').value = ev.category;
+                document.getElementById('event-date-input').value = ev.date;
+                document.getElementById('event-time-input').value = ev.time || '';
+                document.getElementById('event-venue-input').value = ev.venue;
+                document.getElementById('event-organizer-input').value = ev.organizer;
+                document.getElementById('event-capacity-input').value = ev.seatsAvailable || 100;
+                document.getElementById('event-description-input').value = ev.description;
+            } else {
+                titleEl.textContent = '+ Add New Campus Event';
+                editIdInput.value = '';
+                document.getElementById('event-date-input').value = new Date().toISOString().split('T')[0];
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeEventModal() {
+            document.getElementById('event-modal').style.display = 'none';
+        }
+
+        function saveEventData(e) {
+            e.preventDefault();
+            const editId = document.getElementById('event-edit-id').value;
+            const title = document.getElementById('event-title-input').value.trim();
+            const category = document.getElementById('event-category-input').value;
+            const date = document.getElementById('event-date-input').value;
+            const time = document.getElementById('event-time-input').value.trim();
+            const venue = document.getElementById('event-venue-input').value.trim();
+            const organizer = document.getElementById('event-organizer-input').value.trim();
+            const capacity = parseInt(document.getElementById('event-capacity-input').value, 10) || 100;
+            const description = document.getElementById('event-description-input').value.trim();
+
+            if (editId) {
+                // Modify existing event
+                const idx = adminEvents.findIndex(ev => ev.id == editId);
+                if (idx !== -1) {
+                    adminEvents[idx] = {
+                        ...adminEvents[idx],
+                        title, category, date, time, venue, organizer, seatsAvailable: capacity, description
+                    };
+                    showToast(`✓ Event #${editId} successfully modified!`);
+                }
+            } else {
+                // Add new event
+                const nextId = adminEvents.length > 0 ? Math.max(...adminEvents.map(ev => Number(ev.id) || 0)) + 1 : 1;
+                const newEvent = {
+                    id: nextId,
+                    title,
+                    category,
+                    date,
+                    time: time || '10:00 AM - 02:00 PM',
+                    venue,
+                    organizer,
+                    description,
+                    seatsAvailable: capacity,
+                    status: 'Upcoming'
+                };
+                adminEvents.unshift(newEvent);
+                showToast(`✓ New Event "${title}" created successfully by Admin!`);
+            }
+
+            localStorage.setItem('student_hub_events', JSON.stringify(adminEvents));
+            closeEventModal();
+            updateDashboardStats();
+            renderAdminEventsTable();
+        }
+
+        function deleteEvent(eventId) {
+            const ev = adminEvents.find(e => e.id == eventId);
+            if (!ev) return;
+            if (confirm(`Are you sure you want to delete event "${ev.title}"? This cannot be undone.`)) {
+                adminEvents = adminEvents.filter(e => e.id != eventId);
+                localStorage.setItem('student_hub_events', JSON.stringify(adminEvents));
+                showToast(`🗑️ Event "${ev.title}" has been deleted.`, false);
+                updateDashboardStats();
+                renderAdminEventsTable();
+            }
+        }
+
+        // ==========================================
+        // STUDENT RECORDS DIRECTORY (ADMIN ONLY)
+        // ==========================================
+        function populateStudentDeptOptions() {
+            const deptSelect = document.getElementById('admin-student-dept-filter');
+            if (!deptSelect) return;
+            const depts = Array.from(new Set(adminStudents.map(s => s.department || 'General'))).sort();
+            deptSelect.innerHTML = '<option value="all">All Departments</option>' +
+                depts.map(d => `<option value="${d}">${d}</option>`).join('');
+        }
+
+        function renderAdminStudentsTable() {
+            const tbody = document.getElementById('admin-students-tbody');
+            if (!tbody) return;
+
+            const q = (document.getElementById('admin-student-search').value || '').toLowerCase().trim();
+            const dept = document.getElementById('admin-student-dept-filter').value;
+
+            const filtered = adminStudents.filter(s => {
+                const matchDept = (dept === 'all' || s.department === dept);
+                const matchQ = !q ||
+                    (s.name && s.name.toLowerCase().includes(q)) ||
+                    (s.email && s.email.toLowerCase().includes(q)) ||
+                    (s.id && s.id.toLowerCase().includes(q)) ||
+                    (s.city && s.city.toLowerCase().includes(q));
+                return matchDept && matchQ;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No student records found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(stu => `
+                <tr>
+                    <td><span style="font-weight: 700; color: var(--primary-color);">${stu.id || 'STU-000'}</span></td>
+                    <td><strong>${stu.name}</strong></td>
+                    <td>${stu.email}</td>
+                    <td>${stu.course || 'B.Tech'} (${stu.year || 'Year 1'})</td>
+                    <td>${stu.department || 'Computer Science'}</td>
+                    <td>${stu.mobile || '--'}</td>
+                    <td>${stu.city || 'Campus'}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline" onclick="viewStudentFullDetails('${stu.email}')">👁️ View Full</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function viewStudentFullDetails(email) {
+            const stu = adminStudents.find(s => s.email.toLowerCase() === email.toLowerCase());
+            if (!stu) return;
+
+            const content = document.getElementById('student-view-content');
+            content.innerHTML = `
+                <div style="background: var(--bg-page); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                        <h4 style="font-size: 1.2rem; font-weight: 700; color: var(--navy); margin: 0;">${stu.name}</h4>
+                        <span style="background: var(--primary-light); color: var(--primary-color); font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem;">${stu.id || 'STU-000'}</span>
+                    </div>
+                    <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem;">${stu.course || 'B.Tech'} - ${stu.department || 'Computer Science'} (${stu.year || '3rd Year'}, Semester ${stu.semester || '3'})</p>
+                    <div style="font-size: 0.875rem; line-height: 1.8; color: var(--text-main);">
+                        <p>📧 <strong>Email:</strong> ${stu.email}</p>
+                        <p>📱 <strong>Mobile:</strong> ${stu.mobile || 'Not provided'}</p>
+                        <p>👤 <strong>Gender:</strong> ${stu.gender || 'Not specified'}</p>
+                        <p>📍 <strong>City:</strong> ${stu.city || 'Campus Resident'}</p>
+                        <p>🗓️ <strong>Registration Date:</strong> ${stu.registeredDate || stu.created_at || '2026-08-10'}</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <h5 style="font-weight: 700; margin-bottom: 0.35rem; color: var(--navy);">Academic Bio:</h5>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">${stu.bio || 'Student enrolled in university programs.'}</p>
+                </div>
+
+                <div>
+                    <h5 style="font-weight: 700; margin-bottom: 0.35rem; color: var(--navy);">Skills & Badges:</h5>
+                    <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                        ${(stu.skills || ['General Studies']).map(sk => `<span style="background: var(--primary-light); color: var(--primary-color); font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600;">${sk}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('student-view-modal').style.display = 'flex';
+        }
+
+        function closeStudentModal() {
+            document.getElementById('student-view-modal').style.display = 'none';
+        }
+
+        function exportDataJson() {
+            const exportPayload = {
+                exportedAt: new Date().toISOString(),
+                events: adminEvents,
+                students: adminStudents
+            };
+            const blob = new Blob([JSON.stringify(exportPayload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `student_hub_admin_export_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('student_hub_is_admin');
+            localStorage.removeItem('student_hub_logged_in');
+            localStorage.removeItem('student_hub_current_user');
+            window.location.href = 'home.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAdminData);
+    </script>
+</body>
+</html>

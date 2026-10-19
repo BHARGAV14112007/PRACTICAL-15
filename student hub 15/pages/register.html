@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub - Register</title>
+    <meta name="description" content="Create a new Student Hub account to connect with events and campus resources.">
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="../js/header.js"></script>
+    <script defer src="../js/script.js"></script>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <a href="home.html" class="nav-brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+                <span>STUDENT HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <button type="button" class="theme-toggle">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Main Centered Content -->
+    <main class="main-container">
+        <div class="auth-center-wrapper">
+            <!-- Register Form Card (Centered with no illustration) -->
+            <div class="auth-card" style="max-width: 520px; width: 100%;">
+                <h1 class="auth-title">Create Your Account</h1>
+                <p class="auth-subtitle">Join Student Hub to connect with your campus community</p>
+
+                <form id="registration-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="reg-name">Full Name <span style="color: #dc2626;">*</span></label>
+                        <input type="text" id="reg-name" name="fullname" class="form-control" placeholder="Alex Johnson" required minlength="2" autocomplete="name" aria-describedby="name-error">
+                        <p class="field-error" id="name-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reg-email">Email Address <span style="color: #dc2626;">*</span></label>
+                        <input type="email" id="reg-email" name="email" class="form-control" placeholder="alex@university.edu" required autocomplete="email" aria-describedby="email-error">
+                        <p class="field-error" id="email-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reg-mobile">Mobile Number <span style="color: #dc2626;">*</span></label>
+                        <input type="tel" id="reg-mobile" name="mobile" class="form-control" placeholder="9876543210" required inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" maxlength="10" aria-describedby="mobile-error">
+                        <p class="field-error" id="mobile-error" aria-live="polite"></p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label" for="reg-course">Course <span style="color: #dc2626;">*</span></label>
+                            <select id="reg-course" name="course" class="form-control" required aria-describedby="course-error">
+                                <option value="">Select course</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BBA">BBA</option>
+                                <option value="B.Tech">B.Tech</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <p class="field-error" id="course-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="reg-year">Year <span style="color: #dc2626;">*</span></label>
+                            <select id="reg-year" name="year" class="form-control" required aria-describedby="year-error">
+                                <option value="">Select year</option>
+                                <option value="First Year">First Year</option>
+                                <option value="Second Year">Second Year</option>
+                                <option value="Third Year">Third Year</option>
+                                <option value="Final Year">Final Year</option>
+                            </select>
+                            <p class="field-error" id="year-error" aria-live="polite"></p>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group gender-group" aria-describedby="gender-error">
+                        <legend class="form-label">Gender <span style="color: #dc2626;">*</span></legend>
+                        <div class="radio-options">
+                            <label><input type="radio" name="gender" value="Male" required> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+                        </div>
+                        <p class="field-error" id="gender-error" aria-live="polite"></p>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reg-password">Password <span style="color: #dc2626;">*</span></label>
+                        <input type="password" id="reg-password" name="password" class="form-control" placeholder="Create password (min 8 chars)" required minlength="8" autocomplete="new-password" aria-describedby="password-strength password-error">
+                        <p class="password-strength" id="password-strength" aria-live="polite">Password strength: Not entered</p>
+                        <p class="field-error" id="password-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="reg-confirm">Confirm Password <span style="color: #dc2626;">*</span></label>
+                        <input type="password" id="reg-confirm" name="confirm_password" class="form-control" placeholder="Confirm password" required autocomplete="new-password" aria-describedby="confirm-error">
+                        <p class="field-error" id="confirm-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group terms-group">
+                        <label class="form-checkbox" for="reg-terms">
+                            <input type="checkbox" id="reg-terms" name="terms" required aria-describedby="terms-error">
+                            I accept the terms and conditions.
+                        </label>
+                        <p class="field-error" id="terms-error" aria-live="polite"></p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" style="padding: 0.75rem; margin-top: 1rem; font-weight: 600;">Register Account</button>
+                    <p class="form-success" id="form-success" role="status" aria-live="polite" hidden></p>
+                </form>
+
+                <p class="auth-footer-text">
+                    Already have an account? <a href="login.html" style="color: var(--blue); font-weight: 600;">Log In Here</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 Student Hub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

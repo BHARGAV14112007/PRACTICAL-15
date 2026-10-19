@@ -1,0 +1,17 @@
+[
+  {"id":1,"question":"How can I register for a college event?","answer":"Open the event notice and submit the registration form before its deadline.","category":"Events"},
+  {"id":2,"question":"Where can I see my class timetable?","answer":"The department uploads the current timetable on the student notice board and portal.","category":"Academics"},
+  {"id":3,"question":"How do I apply for a library card?","answer":"Visit the library counter with your college identity card and one passport-size photograph.","category":"Library"},
+  {"id":4,"question":"What are the computer lab timings?","answer":"Computer labs are normally open from 9:00 AM to 5:00 PM on working days.","category":"Facilities"},
+  {"id":5,"question":"How can I join a sports team?","answer":"Contact the sports committee or attend the team trials announced each semester.","category":"Sports"},
+  {"id":6,"question":"Where are examination notices published?","answer":"Examination notices are posted on the official notice board and college portal.","category":"Examinations"},
+  {"id":7,"question":"How do I request a bonafide certificate?","answer":"Submit the certificate request form at the administrative office during working hours.","category":"Administration"},
+  {"id":8,"question":"Can students use the Wi-Fi network?","answer":"Yes, students can use campus Wi-Fi with the login details provided by the IT cell.","category":"Facilities"},
+  {"id":9,"question":"How can I borrow a book from the library?","answer":"Use your library card at the issue counter after selecting an available book.","category":"Library"},
+  {"id":10,"question":"What should I carry for practical examinations?","answer":"Carry your identity card, practical file, required stationery and lab coat if needed.","category":"Examinations"},
+  {"id":11,"question":"How can I submit an event suggestion?","answer":"Share your suggestion with the student council or the concerned club coordinator.","category":"Events"},
+  {"id":12,"question":"Where can I find course syllabus details?","answer":"Syllabus details are available from the department office and the academic portal.","category":"Academics"},
+  {"id":13,"question":"How do I update my contact information?","answer":"Request the administration office to update your registered contact details.","category":"Administration"},
+  {"id":14,"question":"Are indoor games available on campus?","answer":"Yes, the indoor sports hall offers badminton, table tennis and carrom facilities.","category":"Sports"},
+  {"id":15,"question":"What should I do if I lose my identity card?","answer":"Report the loss to the administration office and apply for a duplicate card.","category":"Administration"}
+]

@@ -1,0 +1,357 @@
+[
+    {
+        "id": "STU-1017",
+        "name": "zalariya bhargav",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "zalariyabhargav@gmail.com",
+        "mobile": "9879456565",
+        "city": "Campus Resident",
+        "gender": "Male",
+        "registeredDate": "2026-10-05",
+        "bio": "Enrolled in B.Tech (Second Year). Passionate student hub member and campus learner.",
+        "skills": [
+            "Web Development",
+            "Problem Solving",
+            "Teamwork",
+            "Communication"
+        ],
+        "password_hash": "$2y$10$m8/J/kbzpINazub5N/uBKeAIeQYcRLw1BD2XDdwWOGd4vn/OtkUVm",
+        "created_at": "2026-10-05 11:46:47"
+    },
+    {
+        "id": "STU-1016",
+        "name": "khus",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "khus2525@gmail.com",
+        "mobile": "9879456565",
+        "city": "Campus Resident",
+        "gender": "Male",
+        "registeredDate": "2026-10-05",
+        "bio": "Enrolled in B.Tech (Second Year). Passionate student hub member and campus learner.",
+        "skills": [
+            "Web Development",
+            "Problem Solving",
+            "Teamwork",
+            "Communication"
+        ],
+        "password_hash": "$2y$10$d/.zhSgWqFZQI59C1jj2y.Adfakn0yAi0AQdaaSS85TgvlSlgodaa",
+        "created_at": "2026-10-05 09:23:08"
+    },
+    {
+        "id": "STU-1015",
+        "name": "Kabir Mehta",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "kabir.mehta@college.edu",
+        "mobile": "9823456781",
+        "city": "Campus Resident",
+        "gender": "Male",
+        "registeredDate": "2026-10-04",
+        "bio": "Enrolled in B.Tech (Third Year). Passionate student hub member and campus learner.",
+        "skills": [
+            "Web Development",
+            "Problem Solving",
+            "Teamwork",
+            "Communication"
+        ],
+        "password_hash": "$2y$10$vOsDLTufYEQzU/olcvc6jOkZQCw5l8wWnTHHOKmOZpfanO4odc/TW",
+        "created_at": "2026-10-04 18:20:40"
+    },
+    {
+        "id": "STU-1014",
+        "name": "Test Student",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "test.student.1791130768@college.edu",
+        "mobile": "9876543210",
+        "city": "Campus Resident",
+        "gender": "Female",
+        "registeredDate": "2026-10-04",
+        "bio": "Enrolled in B.Tech (Second Year).",
+        "skills": [
+            "Web Development",
+            "Problem Solving"
+        ],
+        "password_hash": "$2y$10$X/7XVsG7FJA63xK8H/.1pONmEVkDZZbDAfrQM2P9dvBFCEHvsOMo2",
+        "created_at": "2026-10-04 18:19:28"
+    },
+    {
+        "id": "STU-1013",
+        "name": "Test Student",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "test.student.1791130749@college.edu",
+        "mobile": "9876543210",
+        "city": "Campus Resident",
+        "gender": "Female",
+        "registeredDate": "2026-10-04",
+        "bio": "Enrolled in B.Tech (Second Year).",
+        "skills": [
+            "Web Development",
+            "Problem Solving"
+        ],
+        "password_hash": "$2y$10$omdgprsLWTwOBpkNwS8NHOifmWa/Bor95ADputWuUtNOIC2KMXh9m",
+        "created_at": "2026-10-04 18:19:09"
+    },
+    {
+        "id": "STU-1001",
+        "name": "Aarav Sharma",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "aarav.sharma@college.edu",
+        "mobile": "9876543210",
+        "city": "Delhi",
+        "gender": "Male",
+        "registeredDate": "2026-08-10",
+        "bio": "Passionate full-stack developer with keen interest in cloud architecture and distributed systems.",
+        "skills": [
+            "JavaScript",
+            "Python",
+            "React",
+            "Node.js",
+            "MongoDB"
+        ]
+    },
+    {
+        "id": "STU-1002",
+        "name": "Priya Verma",
+        "department": "Information Technology",
+        "course": "B.Tech",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "priya.verma@college.edu",
+        "mobile": "9812345678",
+        "city": "Lucknow",
+        "gender": "Female",
+        "registeredDate": "2026-08-11",
+        "bio": "Cybersecurity enthusiast and competitive programmer who loves organizing campus hackathons.",
+        "skills": [
+            "C++",
+            "Java",
+            "SQL",
+            "Network Security",
+            "Linux"
+        ]
+    },
+    {
+        "id": "STU-1003",
+        "name": "Rohan Patel",
+        "department": "Mechanical Engineering",
+        "course": "B.Tech",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "rohan.patel@college.edu",
+        "mobile": "9723456789",
+        "city": "Ahmedabad",
+        "gender": "Male",
+        "registeredDate": "2026-08-14",
+        "bio": "CAD designer and robotics hobbyist active in university mechanical racing club.",
+        "skills": [
+            "AutoCAD",
+            "SolidWorks",
+            "MATLAB",
+            "Thermodynamics",
+            "3D Printing"
+        ]
+    },
+    {
+        "id": "STU-1004",
+        "name": "Ananya Singh",
+        "department": "Electronics Engineering",
+        "course": "B.Tech",
+        "year": "Final Year",
+        "semester": "7",
+        "email": "ananya.singh@college.edu",
+        "mobile": "9934567890",
+        "city": "Jaipur",
+        "gender": "Female",
+        "registeredDate": "2026-08-15",
+        "bio": "VLSI design researcher with published paper on low-power microchip architectures.",
+        "skills": [
+            "Verilog",
+            "Embedded C",
+            "IoT",
+            "FPGA",
+            "Circuit Design"
+        ]
+    },
+    {
+        "id": "STU-1005",
+        "name": "Vikram Kumar",
+        "department": "Civil Engineering",
+        "course": "B.Tech",
+        "year": "First Year",
+        "semester": "1",
+        "email": "vikram.kumar@college.edu",
+        "mobile": "9645678901",
+        "city": "Patna",
+        "gender": "Male",
+        "registeredDate": "2026-08-20",
+        "bio": "Aspiring structural engineer passionate about green building and urban planning.",
+        "skills": [
+            "Surveying",
+            "Structural Analysis",
+            "AutoCAD",
+            "Environmental Tech"
+        ]
+    },
+    {
+        "id": "STU-1006",
+        "name": "Neha Gupta",
+        "department": "Computer Science",
+        "course": "BCA",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "neha.gupta@college.edu",
+        "mobile": "9856789012",
+        "city": "Kanpur",
+        "gender": "Female",
+        "registeredDate": "2026-08-22",
+        "bio": "UI/UX designer and frontend web enthusiast crafting clean user interfaces.",
+        "skills": [
+            "Figma",
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "React"
+        ]
+    },
+    {
+        "id": "STU-1007",
+        "name": "Aditya Joshi",
+        "department": "Information Technology",
+        "course": "B.Tech",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "aditya.joshi@college.edu",
+        "mobile": "9767890123",
+        "city": "Pune",
+        "gender": "Male",
+        "registeredDate": "2026-08-25",
+        "bio": "Mobile app developer specializing in cross-platform Flutter and backend REST APIs.",
+        "skills": [
+            "Flutter",
+            "Dart",
+            "Firebase",
+            "Node.js",
+            "Docker"
+        ]
+    },
+    {
+        "id": "STU-1008",
+        "name": "Sneha Reddy",
+        "department": "Business Administration",
+        "course": "BBA",
+        "year": "Second Year",
+        "semester": "3",
+        "email": "sneha.reddy@college.edu",
+        "mobile": "9878901234",
+        "city": "Hyderabad",
+        "gender": "Female",
+        "registeredDate": "2026-08-28",
+        "bio": "Marketing lead in Student Hub club, focusing on campus outreach and corporate sponsorships.",
+        "skills": [
+            "Digital Marketing",
+            "Financial Accounting",
+            "Event Management",
+            "Communication"
+        ]
+    },
+    {
+        "id": "STU-1009",
+        "name": "Karan Mehta",
+        "department": "Electronics Engineering",
+        "course": "B.Tech",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "karan.mehta@college.edu",
+        "mobile": "9989012345",
+        "city": "Mumbai",
+        "gender": "Male",
+        "registeredDate": "2026-09-01",
+        "bio": "Robotics automation enthusiast working on self-navigating indoor drones.",
+        "skills": [
+            "Arduino",
+            "Raspberry Pi",
+            "ROS",
+            "Python",
+            "Sensors"
+        ]
+    },
+    {
+        "id": "STU-1010",
+        "name": "Ishita Das",
+        "department": "Computer Science",
+        "course": "BCA",
+        "year": "Third Year",
+        "semester": "5",
+        "email": "ishita.das@college.edu",
+        "mobile": "9790123456",
+        "city": "Kolkata",
+        "gender": "Female",
+        "registeredDate": "2026-09-03",
+        "bio": "Data analyst student passionate about data visualization and machine learning algorithms.",
+        "skills": [
+            "Python",
+            "Pandas",
+            "Tableau",
+            "PowerBI",
+            "SQL"
+        ]
+    },
+    {
+        "id": "STU-1011",
+        "name": "Rahul Yadav",
+        "department": "Computer Science",
+        "course": "B.Tech",
+        "year": "First Year",
+        "semester": "1",
+        "email": "rahul.yadav@college.edu",
+        "mobile": "9801234567",
+        "city": "Varanasi",
+        "gender": "Male",
+        "registeredDate": "2026-09-05",
+        "bio": "First-year computer science student exploring algorithms, web design, and open source.",
+        "skills": [
+            "C Language",
+            "HTML/CSS",
+            "Git",
+            "Problem Solving"
+        ]
+    },
+    {
+        "id": "STU-1012",
+        "name": "Kavya Nair",
+        "department": "Information Technology",
+        "course": "B.Tech",
+        "year": "Final Year",
+        "semester": "7",
+        "email": "kavya.nair@college.edu",
+        "mobile": "9812309876",
+        "city": "Kochi",
+        "gender": "Female",
+        "registeredDate": "2026-09-07",
+        "bio": "Cloud architect intern with AWS certified practitioner certification.",
+        "skills": [
+            "AWS",
+            "Kubernetes",
+            "DevOps",
+            "Python",
+            "Microservices"
+        ]
+    }
+]
